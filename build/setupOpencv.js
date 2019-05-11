@@ -35,8 +35,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var fs = require("fs");
-var _1 = require(".");
 var constants_1 = require("./constants");
 var dirs_1 = require("./dirs");
 var env_1 = require("./env");
@@ -152,22 +150,12 @@ function getMsbuildIfWin() {
         });
     });
 }
-function writeAutoBuildFile() {
-    var autoBuildFile = {
-        opencvVersion: env_1.opencvVersion(),
-        autoBuildFlags: env_1.autoBuildFlags(),
-        modules: _1.getLibs(dirs_1.dirs.opencvLibDir)
-    };
-    fs.writeFileSync(dirs_1.dirs.autoBuildFile, JSON.stringify(autoBuildFile));
-}
 function setupOpencv() {
     return __awaiter(this, void 0, void 0, function () {
         var msbuild, cMakeFlags, tag;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, getMsbuildIfWin()
-                    // Get cmake flags here to check for CUDA early on instead of the start of the building process
-                ];
+                case 0: return [4 /*yield*/, getMsbuildIfWin()];
                 case 1:
                     msbuild = _a.sent();
                     cMakeFlags = utils_1.isWin() ? getWinCmakeFlags(msbuild.version) : getSharedCmakeFlags();
@@ -189,7 +177,7 @@ function setupOpencv() {
                 case 6:
                     _a.sent();
                     if (!env_1.isWithoutContrib()) return [3 /*break*/, 7];
-                    log.info('install', 'skipping download of opencv_contrib since OPENCV4NODEJS_AUTOBUILD_WITHOUT_CONTRIB is set');
+                    log.info('install', 'skipping download of opencv_contrib since OPENCV_AUTOBUILD_WITHOUT_CONTRIB is set');
                     return [3 /*break*/, 9];
                 case 7: return [4 /*yield*/, utils_1.spawn('git', ['clone', '-b', "" + tag, '--single-branch', '--depth', '1', '--progress', constants_1.opencvContribRepoUrl], { cwd: dirs_1.dirs.opencvRoot })];
                 case 8:
@@ -204,7 +192,6 @@ function setupOpencv() {
                     return [4 /*yield*/, getRunBuildCmd(utils_1.isWin() ? msbuild.path : undefined)()];
                 case 12:
                     _a.sent();
-                    writeAutoBuildFile();
                     return [4 /*yield*/, utils_1.exec(getRmDirCmd('opencv'), { cwd: dirs_1.dirs.opencvRoot })];
                 case 13:
                     _a.sent();

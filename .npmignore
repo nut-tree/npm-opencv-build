@@ -1,4 +1,9 @@
-opencv
-node_modules
+opencv/*
+!opencv/build
+
+opencv/build/*
+!opencv/build/include/
+!opencv/build/lib/
+
 .vscode
 test

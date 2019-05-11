@@ -146,5 +146,4 @@ describe('libs', () => {
     expect(res.find(l => l.opencvModule === 'objdetect')).to.have.property('libPath').to.equal(objdetectLibFile)
     expect(res.some(({ libPath }) => libPath === dnnObjdetectLibFile)).to.be.false
   })
-
 })

@@ -1,4 +1,3 @@
-export declare const OPENCV_CONTRIB_ARCHIVE = "https://github.com/opencv/opencv_contrib/archive/3.4.6.tar.gz";
 export declare const opencvRepoUrl = "https://github.com/opencv/opencv.git";
 export declare const opencvContribRepoUrl = "https://github.com/opencv/opencv_contrib.git";
 export declare const opencvModules: string[];
