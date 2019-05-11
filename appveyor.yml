@@ -31,8 +31,9 @@ test_script:
 
   # install opencv4nodejs and run tests
   - cd c:\projects
-  - git clone https://github.com/justadudewhohacks/opencv4nodejs
+  - git clone https://github.com/nut-tree/opencv4nodejs
   - cd opencv4nodejs
+  - git checkout opencv-prebuilt
   # uninstall npm version of opencv-build
   - npm uninstall opencv-build
   # install new opencv-build version
