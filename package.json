@@ -1,5 +1,5 @@
 {
-  "name": "@nut-tree/opencv-build",
+  "name": "opencv-build",
   "version": "1.0.0",
   "description": "A simple script to auto build recent OpenCV + contrib version via npm",
   "main": "./build/index.js",
