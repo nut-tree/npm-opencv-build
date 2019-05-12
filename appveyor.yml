@@ -30,15 +30,15 @@ test_script:
   - npm test
 
   # install opencv4nodejs and run tests
-  - cd c:\projects
-  - git clone https://github.com/nut-tree/opencv4nodejs
-  - cd opencv4nodejs
-  - git checkout opencv-prebuilt
+  # - cd c:\projects
+  # - git clone https://github.com/nut-tree/opencv4nodejs
+  # - cd opencv4nodejs
+  # - git checkout opencv-prebuilt
   # uninstall npm version of opencv-build
-  - npm uninstall opencv-build
+  # - npm uninstall opencv-build
   # install new opencv-build version
-  - npm install ../opencv-build
-  - npm install
-  - cd test
-  - npm install
-  - npm run test-appveyor
+  # - npm install ../opencv-build
+  # - npm install
+  # - cd test
+  # - npm install
+  # - npm run test-appveyor
