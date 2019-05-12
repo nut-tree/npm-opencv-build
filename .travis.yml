@@ -15,7 +15,7 @@ deploy:
   on:
     tags: true
     branch: master
-    skip_cleanup: true
+  skip_cleanup: true
   provider: npm
   email: "dev@simon-hofmann.org"
   api_key:
