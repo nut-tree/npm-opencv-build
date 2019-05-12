@@ -16,5 +16,7 @@ deploy:
     tags: true
     branch: master
     skip_cleanup: true
+  provider: npm
+  email: "dev@simon-hofmann.org"
   api_key:
     secure: Tqn0Mv6C4rKtv2qpWmtBBscP7ZihAWuvTigfbLt7LqO2wZ/B9bEEezNDBLdXbFTBpaC4DzuTo1s+5DVKDrZBnHq+wN2eYWWRdBVNSBX+Q1xK1jsGVFYHORh8XXqUcZ3zb8KnGjgH/Sq/GGvdCxhpU8A7qG7puKk+OrofyUZVlSuMN3iZPNeFU83xXypMAdxxuwhUdBQwVwQvX2TcOB92jfpQPQghjD5Kwsc8G3GUec+5ulOc3dSz+P8Qd+XlQWi3Yi/7wqYb83NBEaZ2fmG5fiKez12W8+CivNFzL8moGj12wt0QeSYMX6NxGrazMq6wdAmqznwXeFntWW9afQ5WoEjw+xuuQauDN3bCdyyPPieSh3W/OuP9bWyGZqj9IAT/wCPVpn3J9SI2LFubnLzyumYJu+kFlPltLfJd3LOTqEXZBVe9VDDdoMZWUnHLC+rSZ3r3Aku1c7mcBDR7DVMWyc9BdMgThuS/br6GiRHRaRYMvTYY2mCGpWyOsmbKsgNjC9XjOQsLp7TKr9isj22vmx2Z8tVl1Tqkm+XGp3StAms4GZ+/irlGvd5oy5lV41i1HeX+wtLlObwnn6W/zOX9O+iDizkDjjlGvEqma2gW022XWdN2G5gAEYDbS6tgcIiyhuBXyt89R28uKrCM6cfX5tHUxScnaCF/+k0o5vevBkw=
