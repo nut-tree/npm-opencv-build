@@ -1,21 +1,17 @@
 language: node_js
 
 node_js:
-  # - '6' note: the npm v3 shipped with node 6 messes up __dirname when installing package local filesystem
-  # - '9' TODO figure out why travis has problems installing npmlog here
   - 10
 
 sudo: required
 
+matrix:
+  include:
+    - os: linux
+    - os: osx
+
 before_install:
-  - sudo apt-get update
-  # install tools for reading images from disk
-  - sudo apt-get install libjpeg8-dev libtiff5-dev libjasper-dev libpng12-dev
-  # install video codecs
-  - sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev
-  - sudo apt-get install libxvidcore-dev libx264-dev
-  # install cmake
-  - sudo apt-get install cmake
+  - ./setup_${TRAVIS_OS_NAME}.sh
 
 install:
   # install and run tests of opencv-build
@@ -33,5 +29,3 @@ install:
   - npm install
   - cd test
   - npm install
-  - npm run test-docker
-

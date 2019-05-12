@@ -1,7 +1,8 @@
 {
-  "name": "opencv-build",
+  "name": "@nut-tree/opencv-build",
+  "private": true,
   "version": "1.0.0",
-  "description": "A simple script to auto build recent OpenCV + contrib version via npm",
+  "description": "A simple script to auto build recent OpenCV + contrib version via npm. Base on [justadudewhohacks/npm-opencv-build](https://github.com/justadudewhohacks/npm-opencv-build)",
   "main": "./build/index.js",
   "scripts": {
     "build": "rm -rf build && tsc",
