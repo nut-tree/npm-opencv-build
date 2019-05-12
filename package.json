@@ -5,6 +5,7 @@
   "main": "./build/index.js",
   "scripts": {
     "build": "rm -rf build && tsc",
+    "preinstall": "node ./preinstall.js",
     "install": "node ./install.js",
     "test": "mocha --recursive ./test"
   },
