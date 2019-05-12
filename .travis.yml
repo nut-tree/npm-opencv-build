@@ -7,10 +7,6 @@ node_js:
 
 sudo: required
 
-env:
-  global:
-    - OPENCV_ENABLE_AUTOBUILD=1
-
 before_install:
   - sudo apt-get update
   # install tools for reading images from disk
@@ -23,14 +19,13 @@ before_install:
 
 install:
   # install and run tests of opencv-build
-  - npm install
+  - OPENCV_ENABLE_AUTOBUILD=1 npm install
   - npm test
 
   # install opencv4nodejs and run tests
   - git clone https://github.com/nut-tree/opencv4nodejs
   - cd opencv4nodejs
   - git checkout opencv-prebuilt
-  - npm test
   # uninstall npm version of opencv-build
   - npm uninstall opencv-build
   # install new opencv-build version
