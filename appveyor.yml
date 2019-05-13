@@ -32,7 +32,7 @@ test_script:
   - npm test
 
 on_success:
-  - cmd: cd c:\projects\opencv4nodejs
+  - cmd: cd c:\projects\opencv-build
   - IF defined APPVEYOR_REPO_TAG_NAME (
     npm publish
     )
