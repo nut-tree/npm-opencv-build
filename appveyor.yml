@@ -11,7 +11,7 @@ environment:
   matrix:
     - nodejs_version: 10
 
-clone_folder: c:\projects\opencv-build
+clone_folder: c:\projects\npm-opencv-build
 
 install:
   - cmd: choco install cmake -y
@@ -25,14 +25,15 @@ install:
 build: off
 
 test_script:
-  # install and run tests of opencv-build
-  - cd c:\projects\opencv-build
+  # install and run tests of npm-opencv-build
+  - cd c:\projects\npm-opencv-build
   - SET OPENCV_ENABLE_AUTOBUILD=1
   - npm install
   - npm test
 
 on_success:
-  - cmd: cd c:\projects\opencv-build
+  - cmd: cd c:\projects\npm-opencv-build
+  - tar -czf opencv-build.tar -C .. -L npm-opencv-build\package_win32.txt
   - IF defined APPVEYOR_REPO_TAG_NAME npm publish
 
   # install opencv4nodejs and run tests
