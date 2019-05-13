@@ -2,7 +2,6 @@ platform:
   - x64
 
 image:
-  - Visual Studio 2015
   - Visual Studio 2017
 
 init:
@@ -19,6 +18,8 @@ install:
   - cmd: choco upgrade cmake
   - ps: Install-Product node $env:nodejs_version x64
   - node --version
+  - ps: '"//registry.npmjs.org/:_authToken=$env:npm_auth_token`n" | out-file "$env:userprofile\.npmrc" -Encoding ASCII'
+  - npm whoami
   - SET PATH=%PATH%;C:\Program Files\CMake\bin;
 
 build: off
@@ -26,8 +27,15 @@ build: off
 test_script:
   # install and run tests of opencv-build
   - cd c:\projects\opencv-build
-  - OPENCV_ENABLE_AUTOBUILD=1 npm install
+  - SET OPENCV_ENABLE_AUTOBUILD=1
+  - npm install
   - npm test
+
+on_success:
+  - cmd: cd c:\projects\opencv4nodejs
+  - IF defined APPVEYOR_REPO_TAG_NAME (
+    npm publish
+    )
 
   # install opencv4nodejs and run tests
   # - cd c:\projects
