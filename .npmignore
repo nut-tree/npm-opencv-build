@@ -4,6 +4,7 @@ opencv/*
 opencv/build/*
 !opencv/build/include/
 !opencv/build/lib/
+!opencv/build/x64/
 
 .vscode
 test
