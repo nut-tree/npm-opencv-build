@@ -74,5 +74,6 @@ exports.defaultCmakeFlags = [
     '-DBUILD_opencv_ts=OFF',
     '-DBUILD_opencv_xobjdetect=OFF',
     '-DBUILD_opencv_xphoto=OFF',
+    '-DBUILD_SHARED_LIBS=OFF',
     '-DWITH_VTK=OFF'
 ];
