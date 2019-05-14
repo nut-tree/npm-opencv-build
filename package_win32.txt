@@ -11,4 +11,4 @@ npm-opencv-build\\tsconfig.json
 npm-opencv-build\\build\\
 npm-opencv-build\\opencv\\build\\3rdparty\\
 npm-opencv-build\\opencv\\build\\include\\
-npm-opencv-build\\opencv\\build\\x64\\
+npm-opencv-build\\opencv\\build\\lib\\
