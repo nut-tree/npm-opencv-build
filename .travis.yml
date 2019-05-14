@@ -15,7 +15,7 @@ install:
 before_deploy:
   - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
   - npm whoami
-  - tar -czf opencv-build.tar -h -C .. -T package.txt
+  - bsdtar -czf opencv-build.tar -h -C .. -T package.txt
 
 deploy:
   provider: script
