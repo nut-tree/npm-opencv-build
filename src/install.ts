@@ -1,4 +1,4 @@
-import {autoBuildFlags, isAutoBuildEnabled, isWithoutContrib, opencvVersion} from "./env";
+import {autoBuildFlags, isAutoBuildEnabled, isWithContrib, opencvVersion} from "./env";
 import {setupOpencv} from "./setupOpencv";
 import {requireCmake, requireGit} from "./utils";
 
@@ -13,7 +13,7 @@ export async function install() {
         log.info(
             "install",
             "with opencv contrib: %s",
-            isWithoutContrib() ? "no" : "yes"
+            isWithContrib() ? "yes" : "no"
         );
         log.info("install", "custom build flags: %s", autoBuildFlags());
         log.info("install", "");

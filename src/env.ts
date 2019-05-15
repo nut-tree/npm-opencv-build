@@ -10,8 +10,8 @@ export function buildWithCuda(): boolean {
     return !!process.env.OPENCV_BUILD_CUDA || false;
 }
 
-export function isWithoutContrib() {
-    return !!process.env.OPENCV_AUTOBUILD_WITHOUT_CONTRIB;
+export function isWithContrib() {
+    return !!process.env.OPENCV_AUTOBUILD_WITH_CONTRIB;
 }
 
 export function autoBuildFlags(): string {

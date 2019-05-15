@@ -5,23 +5,8 @@ exports.opencvRepoUrl = 'https://github.com/opencv/opencv.git';
 exports.opencvContribRepoUrl = 'https://github.com/opencv/opencv_contrib.git';
 exports.opencvModules = [
     'core',
-    'highgui',
     'imgcodecs',
     'imgproc',
-    'features2d',
-    'calib3d',
-    'photo',
-    'objdetect',
-    'ml',
-    'video',
-    'videoio',
-    'videostab',
-    'dnn',
-    'face',
-    'text',
-    'tracking',
-    'xfeatures2d',
-    'ximgproc'
 ];
 exports.cmakeVsCompilers = {
     '10': 'Visual Studio 10 2010',
@@ -74,5 +59,25 @@ exports.defaultCmakeFlags = [
     '-DBUILD_opencv_ts=OFF',
     '-DBUILD_opencv_xobjdetect=OFF',
     '-DBUILD_opencv_xphoto=OFF',
+    // Custom config
+    '-DBUILD_opencv_calib3d=OFF',
+    '-DBUILD_opencv_dnn=OFF',
+    '-DBUILD_opencv_features2d=OFF',
+    '-DBUILD_opencv_flann=OFF',
+    '-DBUILD_opencv_gapi=OFF',
+    '-DBUILD_opencv_video=OFF',
+    '-DBUILD_opencv_videoio=OFF',
+    '-DBUILD_SHARED_LIBS=OFF',
+    '-DBUILD_opencv_world=ON',
+    '-DBUILD_PNG=ON',
+    '-DBUILD_TIFF=ON',
+    '-DBUILD_JASPER=ON',
+    '-DBUILD_JPEG=ON',
+    '-DBUILD_ZLIB=ON',
+    '-DBUILD_OPENEXR=ON',
+    '-WITH_JPEG=ON',
+    '-WITH_PNG=ON',
+    '-WITH_JASPER=ON',
+    '-WITH_TIFF=ON',
     '-DWITH_VTK=OFF'
 ];

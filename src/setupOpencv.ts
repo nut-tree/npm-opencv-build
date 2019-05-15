@@ -1,6 +1,6 @@
 import {cmakeArchs, cmakeVsCompilers, defaultCmakeFlags, opencvContribRepoUrl, opencvRepoUrl} from './constants';
 import {dirs} from './dirs';
-import {buildWithCuda, isWithoutContrib, numberOfCoresAvailable, opencvVersion, parseAutoBuildFlags} from './env';
+import {buildWithCuda, isWithContrib, numberOfCoresAvailable, opencvVersion, parseAutoBuildFlags} from './env';
 import {findMsBuild} from './findMsBuild';
 import {exec, isCudaAvailable, isWin, spawn} from './utils';
 
@@ -50,12 +50,12 @@ function getCudaCmakeFlags() {
 }
 
 function getSharedCmakeFlags() {
-    let conditionalFlags = isWithoutContrib()
-        ? []
-        : [
+    let conditionalFlags = isWithContrib()
+        ? [
             '-DOPENCV_ENABLE_NONFREE=ON',
             `-DOPENCV_EXTRA_MODULES_PATH=${dirs.opencvContribModules}`
-        ];
+        ]
+        : [];
 
     if (buildWithCuda() && isCudaAvailable()) {
         log.info('install', 'Adding CUDA flags...');
@@ -111,10 +111,10 @@ export async function setupOpencv() {
     await exec(getRmDirCmd('opencv'), {cwd: dirs.opencvRoot});
     await exec(getRmDirCmd('opencv_contrib'), {cwd: dirs.opencvRoot});
 
-    if (isWithoutContrib()) {
-        log.info('install', 'skipping download of opencv_contrib since OPENCV_AUTOBUILD_WITHOUT_CONTRIB is set')
-    } else {
+    if (isWithContrib()) {
         await spawn('git', ['clone', '-b', `${tag}`, '--single-branch', '--depth', '1', '--progress', opencvContribRepoUrl], {cwd: dirs.opencvRoot});
+    } else {
+        log.info('install', 'skipping download of opencv_contrib since OPENCV_AUTOBUILD_WITH_CONTRIB is not set')
     }
     await spawn('git', ['clone', '-b', `${tag}`, '--single-branch', '--depth', '1', '--progress', opencvRepoUrl], {cwd: dirs.opencvRoot});
 
