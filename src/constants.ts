@@ -79,7 +79,6 @@ export const defaultCmakeFlags = [
     '-DBUILD_opencv_xphoto=OFF',
 // Custom config
     '-DOPENCV_FORCE_3RDPARTY_BUILD=ON',
-    '-DBUILD_SHARED_LIBS=OFF',
     '-DBUILD_PNG=ON',
     '-DBUILD_TIFF=ON',
     '-DBUILD_JASPER=ON',
@@ -93,5 +92,6 @@ export const defaultCmakeFlags = [
     '-DWITH_PNG=ON',
     '-DWITH_JASPER=ON',
     '-DWITH_TIFF=ON',
+    '-DWITH_FFMPEG=OFF',
     '-DWITH_VTK=OFF'
 ];
