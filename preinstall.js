@@ -2,7 +2,7 @@ const fs = require("fs");
 const filename = "./package.json";
 const packageJson = require(filename);
 
-const plattformPackageName = `@nut-tree/opencv-build-${process.platform}`
+const plattformPackageName = `@nut-tree/opencv-build-${process.platform}`;
 packageJson.name = plattformPackageName;
 
 try {
