@@ -6,6 +6,10 @@ function isAutoBuildEnabled() {
     return !!process.env.OPENCV_ENABLE_AUTOBUILD;
 }
 exports.isAutoBuildEnabled = isAutoBuildEnabled;
+function linkStatic() {
+    return !!process.env.OPENCV_LINK_STATIC || true;
+}
+exports.linkStatic = linkStatic;
 function buildWithCuda() {
     return !!process.env.OPENCV_BUILD_CUDA || false;
 }
