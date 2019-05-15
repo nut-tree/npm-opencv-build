@@ -6,5 +6,5 @@ export declare const opencvBinDir: string;
 export declare const opencvBuildDir: string;
 export declare const opencv3rdPartyDir: string;
 export declare const opencv3rdPartyLibsDir: string;
+export declare const opencv3rdPartyLibs: string[];
 export declare const getLibs: (libDir: string) => import("./types").OpencvModule[];
-export declare const get3rdPartyLibs: void;

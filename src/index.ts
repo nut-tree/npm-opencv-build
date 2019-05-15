@@ -15,6 +15,6 @@ export const opencvBinDir = dirs.opencvBinDir;
 export const opencvBuildDir = dirs.opencvBuild;
 export const opencv3rdPartyDir = dirs.opencv3rdParty;
 export const opencv3rdPartyLibsDir = dirs.opencv3rdPartyLibDir;
+export const opencv3rdPartyLibs = listFolder(opencv3rdPartyLibsDir, isWin() ? "lib" : "a");
 export const getLibs = getLibsFactory({isWin, isOSX, opencvModules, path, fs});
-export const get3rdPartyLibs = listFolder(opencv3rdPartyLibsDir, isWin() ? "lib" : "a");
 

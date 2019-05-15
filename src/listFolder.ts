@@ -7,7 +7,7 @@ export const listFolder = (libDir: string, fileEnding: string) => {
   }
   const fileMatch = new RegExp(`.*\.${fileEnding}$`);
   const files = readdirSync(libDir) as string[];
-  files
+  return files
     .filter(file => file.match(fileMatch))
     .filter(file => lstatSync(join(libDir, file)).isFile())
     .map(file => realpathSync(resolve(libDir, file)));

@@ -18,5 +18,5 @@ exports.opencvBinDir = dirs_1.dirs.opencvBinDir;
 exports.opencvBuildDir = dirs_1.dirs.opencvBuild;
 exports.opencv3rdPartyDir = dirs_1.dirs.opencv3rdParty;
 exports.opencv3rdPartyLibsDir = dirs_1.dirs.opencv3rdPartyLibDir;
+exports.opencv3rdPartyLibs = listFolder_1.listFolder(exports.opencv3rdPartyLibsDir, utils_1.isWin() ? "lib" : "a");
 exports.getLibs = getLibsFactory_1.getLibsFactory({ isWin: utils_1.isWin, isOSX: utils_1.isOSX, opencvModules: constants_1.opencvModules, path: path, fs: fs });
-exports.get3rdPartyLibs = listFolder_1.listFolder(exports.opencv3rdPartyLibsDir, utils_1.isWin() ? "lib" : "a");
