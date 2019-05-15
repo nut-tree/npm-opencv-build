@@ -50,7 +50,7 @@ function install() {
                     log.info("install", "running install script...");
                     log.info("install", "");
                     log.info("install", "opencv version: %s", env_1.opencvVersion());
-                    log.info("install", "with opencv contrib: %s", env_1.isWithContrib() ? "yes" : "no");
+                    log.info("install", "with opencv contrib: %s", env_1.isWithoutContrib() ? "no" : "yes");
                     log.info("install", "custom build flags: %s", env_1.autoBuildFlags());
                     log.info("install", "");
                     _a.label = 1;

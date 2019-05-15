@@ -10,10 +10,10 @@ function buildWithCuda() {
     return !!process.env.OPENCV_BUILD_CUDA || false;
 }
 exports.buildWithCuda = buildWithCuda;
-function isWithContrib() {
-    return !!process.env.OPENCV_AUTOBUILD_WITH_CONTRIB;
+function isWithoutContrib() {
+    return !!process.env.OPENCV_AUTOBUILD_WITHOUT_CONTRIB;
 }
-exports.isWithContrib = isWithContrib;
+exports.isWithoutContrib = isWithoutContrib;
 function autoBuildFlags() {
     return process.env.OPENCV_AUTOBUILD_FLAGS || '';
 }

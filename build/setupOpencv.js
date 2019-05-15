@@ -102,12 +102,12 @@ function getCudaCmakeFlags() {
     ];
 }
 function getSharedCmakeFlags() {
-    var conditionalFlags = env_1.isWithContrib()
-        ? [
+    var conditionalFlags = env_1.isWithoutContrib()
+        ? []
+        : [
             '-DOPENCV_ENABLE_NONFREE=ON',
             "-DOPENCV_EXTRA_MODULES_PATH=" + dirs_1.dirs.opencvContribModules
-        ]
-        : [];
+        ];
     if (env_1.buildWithCuda() && utils_1.isCudaAvailable()) {
         log.info('install', 'Adding CUDA flags...');
         conditionalFlags = conditionalFlags.concat(getCudaCmakeFlags());
@@ -176,13 +176,12 @@ function setupOpencv() {
                     return [4 /*yield*/, utils_1.exec(getRmDirCmd('opencv_contrib'), { cwd: dirs_1.dirs.opencvRoot })];
                 case 6:
                     _a.sent();
-                    if (!env_1.isWithContrib()) return [3 /*break*/, 8];
-                    return [4 /*yield*/, utils_1.spawn('git', ['clone', '-b', "" + tag, '--single-branch', '--depth', '1', '--progress', constants_1.opencvContribRepoUrl], { cwd: dirs_1.dirs.opencvRoot })];
-                case 7:
-                    _a.sent();
+                    if (!env_1.isWithoutContrib()) return [3 /*break*/, 7];
+                    log.info('install', 'skipping download of opencv_contrib since OPENCV_AUTOBUILD_WITHOUT_CONTRIB is not set');
                     return [3 /*break*/, 9];
+                case 7: return [4 /*yield*/, utils_1.spawn('git', ['clone', '-b', "" + tag, '--single-branch', '--depth', '1', '--progress', constants_1.opencvContribRepoUrl], { cwd: dirs_1.dirs.opencvRoot })];
                 case 8:
-                    log.info('install', 'skipping download of opencv_contrib since OPENCV_AUTOBUILD_WITH_CONTRIB is not set');
+                    _a.sent();
                     _a.label = 9;
                 case 9: return [4 /*yield*/, utils_1.spawn('git', ['clone', '-b', "" + tag, '--single-branch', '--depth', '1', '--progress', constants_1.opencvRepoUrl], { cwd: dirs_1.dirs.opencvRoot })];
                 case 10:
