@@ -5,8 +5,23 @@ exports.opencvRepoUrl = 'https://github.com/opencv/opencv.git';
 exports.opencvContribRepoUrl = 'https://github.com/opencv/opencv_contrib.git';
 exports.opencvModules = [
     'core',
+    'highgui',
     'imgcodecs',
     'imgproc',
+    'features2d',
+    'calib3d',
+    'photo',
+    'objdetect',
+    'ml',
+    'video',
+    'videoio',
+    'videostab',
+    'dnn',
+    'face',
+    'text',
+    'tracking',
+    'xfeatures2d',
+    'ximgproc'
 ];
 exports.cmakeVsCompilers = {
     '10': 'Visual Studio 10 2010',

@@ -5,8 +5,23 @@ export const opencvContribRepoUrl = 'https://github.com/opencv/opencv_contrib.gi
 
 export const opencvModules = [
     'core',
+    'highgui',
     'imgcodecs',
     'imgproc',
+    'features2d',
+    'calib3d',
+    'photo',
+    'objdetect',
+    'ml',
+    'video',
+    'videoio',
+    'videostab',
+    'dnn',
+    'face',
+    'text',
+    'tracking',
+    'xfeatures2d',
+    'ximgproc'
 ];
 
 export const cmakeVsCompilers = {
