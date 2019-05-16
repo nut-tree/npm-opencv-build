@@ -9,8 +9,8 @@ export declare const cmakeVsCompilers: {
     "15": string;
 };
 export declare const cmakeArchs: {
-    x64: string;
-    ia32: string;
-    arm: string;
+    "x64": string;
+    "ia32": string;
+    "arm": string;
 };
 export declare const defaultCmakeFlags: string[];

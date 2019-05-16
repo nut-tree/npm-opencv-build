@@ -4,27 +4,24 @@ var dirs_1 = require("./dirs");
 exports.opencvRepoUrl = "https://github.com/opencv/opencv.git";
 exports.opencvContribRepoUrl = "https://github.com/opencv/opencv_contrib.git";
 exports.opencvModules = [
-    "calib3d",
-    "core",
-    "dnn",
-    "face",
-    "features2d",
-    "flann",
-    "freetype",
-    "highgui",
-    "imgcodecs",
-    "imgproc",
-    "ml",
-    "objdetect",
-    "photo",
-    "plot",
-    "text",
-    "tracking",
-    "video",
-    "videoio",
-    "videostab",
-    "xfeatures2d",
-    "ximgproc"
+    'core',
+    'highgui',
+    'imgcodecs',
+    'imgproc',
+    'features2d',
+    'calib3d',
+    'photo',
+    'objdetect',
+    'ml',
+    'video',
+    'videoio',
+    'videostab',
+    'dnn',
+    'face',
+    'text',
+    'tracking',
+    'xfeatures2d',
+    'ximgproc'
 ];
 exports.cmakeVsCompilers = {
     "10": "Visual Studio 10 2010",
@@ -34,9 +31,9 @@ exports.cmakeVsCompilers = {
     "15": "Visual Studio 15 2017"
 };
 exports.cmakeArchs = {
-    x64: " Win64",
-    ia32: "",
-    arm: " ARM"
+    "x64": " Win64",
+    "ia32": "",
+    "arm": " ARM"
 };
 exports.defaultCmakeFlags = [
     "-DCMAKE_INSTALL_PREFIX=" + dirs_1.dirs.opencvBuild,
@@ -88,6 +85,7 @@ exports.defaultCmakeFlags = [
     "-DBUILD_IPP_IW=ON",
     "-DBUILD_ITT=ON",
     "-DBUILD_USE_SYMLINKS=OFF",
+    "-DENABLE_PIC=ON",
     "-DWITH_JPEG=ON",
     "-DWITH_PNG=ON",
     "-DWITH_JASPER=ON",
