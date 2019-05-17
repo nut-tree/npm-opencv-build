@@ -1,5 +1,5 @@
 {
-  "name": "@nut-tree/opencv-build-darwin",
+  "name": "@nut-tree/opencv-build",
   "version": "3.4.6-beta24",
   "description": "A simple script to auto build recent OpenCV + contrib version via npm. Base on [justadudewhohacks/npm-opencv-build](https://github.com/justadudewhohacks/npm-opencv-build)",
   "main": "./build/index.js",
@@ -25,10 +25,12 @@
   },
   "homepage": "https://github.com/nut-tree/npm-opencv-build#readme",
   "dependencies": {
-    "@types/node": "^12.0.0",
+    "fs-extra": "^8.0.1",
     "npmlog": "^4.1.2"
   },
   "devDependencies": {
+    "@types/fs-extra": "^7.0.0",
+    "@types/node": "^12.0.0",
     "chai": "^4.2.0",
     "mocha": "^6.1.4",
     "typescript": "^3.4.5"

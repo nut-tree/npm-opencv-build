@@ -40,7 +40,7 @@ var dirs_1 = require("./dirs");
 var env_1 = require("./env");
 var findMsBuild_1 = require("./findMsBuild");
 var utils_1 = require("./utils");
-var fs_1 = require("fs");
+var fs_extra_1 = require("fs-extra");
 var log = require('npmlog');
 function getIfExistsDirCmd(dirname, exists) {
     if (exists === void 0) { exists = true; }
@@ -213,11 +213,15 @@ function installOpenCV() {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    if (fs_1.existsSync(dirs_1.dirs.installedOpenCV)) {
+                    if (fs_extra_1.existsSync(dirs_1.dirs.installedOpenCV)) {
                         throw new Error("Failed to install, " + dirs_1.dirs.installedOpenCV + " already exists.");
                     }
                     log.info("Installing to " + dirs_1.dirs.installedOpenCV, "");
-                    return [4 /*yield*/, utils_1.exec(getCpDirCmd(dirs_1.dirs.opencvRoot, dirs_1.dirs.installedOpenCV))];
+                    return [4 /*yield*/, fs_extra_1.copy(dirs_1.dirs.opencvRoot, dirs_1.dirs.installedOpenCV, {
+                            recursive: true,
+                            errorOnExist: true,
+                            overwrite: false
+                        })];
                 case 1:
                     _a.sent();
                     return [2 /*return*/];

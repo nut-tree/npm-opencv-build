@@ -3,7 +3,7 @@ import {dirs} from './dirs';
 import {buildWithCuda, isWithoutContrib, numberOfCoresAvailable, opencvVersion, parseAutoBuildFlags} from './env';
 import {findMsBuild} from './findMsBuild';
 import {exec, isCudaAvailable, isWin, spawn} from './utils';
-import {existsSync} from "fs";
+import {existsSync, copy} from "fs-extra";
 
 const log = require('npmlog');
 
@@ -135,5 +135,9 @@ export async function installOpenCV() {
         throw new Error(`Failed to install, ${dirs.installedOpenCV} already exists.`)
     }
     log.info(`Installing to ${dirs.installedOpenCV}`, "");
-    await exec(getCpDirCmd(dirs.opencvRoot, dirs.installedOpenCV));
+    await copy(dirs.opencvRoot, dirs.installedOpenCV, {
+        recursive: true,
+        errorOnExist: true,
+        overwrite: false
+    });
 }
