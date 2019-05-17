@@ -40,6 +40,7 @@ var dirs_1 = require("./dirs");
 var env_1 = require("./env");
 var findMsBuild_1 = require("./findMsBuild");
 var utils_1 = require("./utils");
+var fs_1 = require("fs");
 var log = require('npmlog');
 function getIfExistsDirCmd(dirname, exists) {
     if (exists === void 0) { exists = true; }
@@ -50,6 +51,9 @@ function getMkDirCmd(dirname) {
 }
 function getRmDirCmd(dirname) {
     return utils_1.isWin() ? getIfExistsDirCmd(dirname) + " rd /s /q " + dirname : "rm -rf " + dirname;
+}
+function getCpDirCmd(src, dest) {
+    return utils_1.isWin() ? "Xcopy /E /I " + src + " " + dest : "cp -r " + src + " " + dest;
 }
 function getMsbuildCmd(sln) {
     return [
@@ -204,3 +208,21 @@ function setupOpencv() {
     });
 }
 exports.setupOpencv = setupOpencv;
+function installOpenCV() {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    if (fs_1.existsSync(dirs_1.dirs.installedOpenCV)) {
+                        throw new Error("Failed to install, " + dirs_1.dirs.installedOpenCV + " already exists.");
+                    }
+                    log.info("Installing to " + dirs_1.dirs.installedOpenCV, "");
+                    return [4 /*yield*/, utils_1.exec(getCpDirCmd(dirs_1.dirs.opencvRoot, dirs_1.dirs.installedOpenCV))];
+                case 1:
+                    _a.sent();
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
+exports.installOpenCV = installOpenCV;

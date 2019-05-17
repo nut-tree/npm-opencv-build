@@ -1,6 +1,6 @@
 import * as path from 'path';
 
-import { isWin } from './utils';
+import {isOSX, isWin} from './utils';
 
 const rootDir = path.resolve(__dirname, '../');
 const opencvRoot = path.join(rootDir, 'opencv');
@@ -15,6 +15,9 @@ const opencv3rdPartyLibDir = isWin() ? path.join(opencv3rdParty, 'lib/Release') 
 const opencvBinDir = isWin() ? path.join(opencvBuild, 'bin/Release') : path.join(opencvBuild, 'bin');
 const autoBuildFile = path.join(opencvRoot, 'auto-build.json');
 
+const installDir = isWin() ? path.resolve('/') : isOSX() ? path.resolve('/usr/local/opt') : path.resolve('/opt/');
+const installedOpenCV = path.resolve(path.join(installDir, 'opencv-prebuilt'));
+
 export const dirs = {
   rootDir,
   opencvRoot,
@@ -27,5 +30,6 @@ export const dirs = {
   opencvLibDir,
   opencv3rdPartyLibDir,
   opencvBinDir,
-  autoBuildFile
+  autoBuildFile,
+  installedOpenCV
 };

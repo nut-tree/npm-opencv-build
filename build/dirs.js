@@ -14,6 +14,8 @@ var opencvLibDir = utils_1.isWin() ? path.join(opencvBuild, 'lib/Release') : pat
 var opencv3rdPartyLibDir = utils_1.isWin() ? path.join(opencv3rdParty, 'lib/Release') : path.join(opencv3rdParty, 'lib');
 var opencvBinDir = utils_1.isWin() ? path.join(opencvBuild, 'bin/Release') : path.join(opencvBuild, 'bin');
 var autoBuildFile = path.join(opencvRoot, 'auto-build.json');
+var installDir = utils_1.isWin() ? path.resolve('/') : utils_1.isOSX() ? path.resolve('/usr/local/opt') : path.resolve('/opt/');
+var installedOpenCV = path.resolve(path.join(installDir, 'opencv-prebuilt'));
 exports.dirs = {
     rootDir: rootDir,
     opencvRoot: opencvRoot,
@@ -26,5 +28,6 @@ exports.dirs = {
     opencvLibDir: opencvLibDir,
     opencv3rdPartyLibDir: opencv3rdPartyLibDir,
     opencvBinDir: opencvBinDir,
-    autoBuildFile: autoBuildFile
+    autoBuildFile: autoBuildFile,
+    installedOpenCV: installedOpenCV
 };

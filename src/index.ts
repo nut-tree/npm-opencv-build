@@ -12,4 +12,5 @@ export const opencvInclude = dirs.opencvInclude;
 export const opencvLibDir = dirs.opencvLibDir;
 export const opencvBinDir = dirs.opencvBinDir;
 export const opencvBuildDir = dirs.opencvBuild;
+export const opencvInstallDir = dirs.installedOpenCV;
 export const getLibs = getLibsFactory({isWin, isOSX, opencvModules, path, fs});

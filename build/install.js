@@ -41,7 +41,7 @@ var utils_1 = require("./utils");
 var log = require("npmlog");
 function install() {
     return __awaiter(this, void 0, void 0, function () {
-        var err_1;
+        var err_1, e_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -71,7 +71,19 @@ function install() {
                     log.error(err_1);
                     process.exit(1);
                     return [3 /*break*/, 6];
-                case 6: return [2 /*return*/];
+                case 6:
+                    _a.trys.push([6, 8, , 9]);
+                    log.info("Moving files", "");
+                    return [4 /*yield*/, setupOpencv_1.installOpenCV()];
+                case 7:
+                    _a.sent();
+                    return [3 /*break*/, 9];
+                case 8:
+                    e_1 = _a.sent();
+                    log.error(e_1);
+                    process.exit(1);
+                    return [3 /*break*/, 9];
+                case 9: return [2 /*return*/];
             }
         });
     });

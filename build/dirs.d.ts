@@ -11,4 +11,5 @@ export declare const dirs: {
     opencv3rdPartyLibDir: string;
     opencvBinDir: string;
     autoBuildFile: string;
+    installedOpenCV: string;
 };

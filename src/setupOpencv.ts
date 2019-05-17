@@ -3,6 +3,7 @@ import {dirs} from './dirs';
 import {buildWithCuda, isWithoutContrib, numberOfCoresAvailable, opencvVersion, parseAutoBuildFlags} from './env';
 import {findMsBuild} from './findMsBuild';
 import {exec, isCudaAvailable, isWin, spawn} from './utils';
+import {existsSync} from "fs";
 
 const log = require('npmlog');
 
@@ -16,6 +17,10 @@ function getMkDirCmd(dirname: string): string {
 
 function getRmDirCmd(dirname: string): string {
     return isWin() ? `${getIfExistsDirCmd(dirname)} rd /s /q ${dirname}` : `rm -rf ${dirname}`
+}
+
+function getCpDirCmd(src: string, dest: string): string {
+    return isWin() ? `Xcopy /E /I ${src} ${dest}` : `cp -r ${src} ${dest}`
 }
 
 function getMsbuildCmd(sln: string): string[] {
@@ -90,7 +95,7 @@ function getCmakeArgs(cmakeFlags: string[]) {
 
 async function getMsbuildIfWin() {
     if (isWin()) {
-        const msbuild = await findMsBuild()
+        const msbuild = await findMsBuild();
         log.info('install', 'using msbuild:', msbuild);
         return msbuild
     }
@@ -123,4 +128,12 @@ export async function setupOpencv() {
 
     await exec(getRmDirCmd('opencv'), {cwd: dirs.opencvRoot});
     await exec(getRmDirCmd('opencv_contrib'), {cwd: dirs.opencvRoot});
+}
+
+export async function installOpenCV() {
+    if (existsSync(dirs.installedOpenCV)) {
+        throw new Error(`Failed to install, ${dirs.installedOpenCV} already exists.`)
+    }
+    log.info(`Installing to ${dirs.installedOpenCV}`, "");
+    await exec(getCpDirCmd(dirs.opencvRoot, dirs.installedOpenCV));
 }
