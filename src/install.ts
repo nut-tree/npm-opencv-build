@@ -1,4 +1,4 @@
-import {autoBuildFlags, isAutoBuildEnabled, isWithoutContrib, opencvVersion} from "./env";
+import {autoBuildFlags, isAutoBuildEnabled, isInstallDisabled, isWithoutContrib, opencvVersion} from "./env";
 import {installOpenCV, setupOpencv} from "./setupOpencv";
 import {requireCmake, requireGit} from "./utils";
 
@@ -27,11 +27,13 @@ export async function install() {
             process.exit(1);
         }
     }
-    try {
-        log.info("Moving files", "");
-        await installOpenCV();
-    } catch (e) {
-        log.error(e);
-        process.exit(1);
+    if (!isInstallDisabled()) {
+        try {
+            log.info("Moving files", "");
+            await installOpenCV();
+        } catch (e) {
+            log.error(e);
+            process.exit(1);
+        }
     }
 }

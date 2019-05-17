@@ -5,11 +5,13 @@ export declare const dirs: {
     opencvContribSrc: string;
     opencvContribModules: string;
     opencvBuild: string;
-    opencv3rdParty: string;
     opencvInclude: string;
     opencvLibDir: string;
-    opencv3rdPartyLibDir: string;
     opencvBinDir: string;
     autoBuildFile: string;
     installedOpenCV: string;
+    installedOpencvBuild: string;
+    installedOpencvInclude: string;
+    installedOpencvLibDir: string;
+    installedOpencvBinDir: string;
 };

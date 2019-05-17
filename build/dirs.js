@@ -8,14 +8,16 @@ var opencvSrc = path.join(opencvRoot, 'opencv');
 var opencvContribSrc = path.join(opencvRoot, 'opencv_contrib');
 var opencvContribModules = path.join(opencvContribSrc, 'modules');
 var opencvBuild = path.join(opencvRoot, 'build');
-var opencv3rdParty = path.join(opencvBuild, '3rdparty');
 var opencvInclude = path.join(opencvBuild, 'include');
 var opencvLibDir = utils_1.isWin() ? path.join(opencvBuild, 'lib/Release') : path.join(opencvBuild, 'lib');
-var opencv3rdPartyLibDir = utils_1.isWin() ? path.join(opencv3rdParty, 'lib/Release') : path.join(opencv3rdParty, 'lib');
 var opencvBinDir = utils_1.isWin() ? path.join(opencvBuild, 'bin/Release') : path.join(opencvBuild, 'bin');
 var autoBuildFile = path.join(opencvRoot, 'auto-build.json');
 var installDir = utils_1.isWin() ? path.resolve('/') : utils_1.isOSX() ? path.resolve('/usr/local/opt') : path.resolve('/opt/');
 var installedOpenCV = path.resolve(path.join(installDir, 'opencv-prebuilt'));
+var installedOpencvBuild = path.join(installedOpenCV, 'build');
+var installedOpencvInclude = path.join(installedOpenCV, 'include');
+var installedOpencvLibDir = utils_1.isWin() ? path.join(installedOpenCV, 'lib/Release') : path.join(installedOpenCV, 'lib');
+var installedOpencvBinDir = utils_1.isWin() ? path.join(installedOpenCV, 'bin/Release') : path.join(installedOpenCV, 'bin');
 exports.dirs = {
     rootDir: rootDir,
     opencvRoot: opencvRoot,
@@ -23,11 +25,13 @@ exports.dirs = {
     opencvContribSrc: opencvContribSrc,
     opencvContribModules: opencvContribModules,
     opencvBuild: opencvBuild,
-    opencv3rdParty: opencv3rdParty,
     opencvInclude: opencvInclude,
     opencvLibDir: opencvLibDir,
-    opencv3rdPartyLibDir: opencv3rdPartyLibDir,
     opencvBinDir: opencvBinDir,
     autoBuildFile: autoBuildFile,
-    installedOpenCV: installedOpenCV
+    installedOpenCV: installedOpenCV,
+    installedOpencvBuild: installedOpencvBuild,
+    installedOpencvInclude: installedOpencvInclude,
+    installedOpencvLibDir: installedOpencvLibDir,
+    installedOpencvBinDir: installedOpencvBinDir
 };

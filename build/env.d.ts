@@ -1,5 +1,5 @@
 export declare function isAutoBuildEnabled(): boolean;
-export declare function linkStatic(): boolean;
+export declare function isInstallDisabled(): boolean;
 export declare function buildWithCuda(): boolean;
 export declare function isWithoutContrib(): boolean;
 export declare function autoBuildFlags(): string;

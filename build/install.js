@@ -72,18 +72,21 @@ function install() {
                     process.exit(1);
                     return [3 /*break*/, 6];
                 case 6:
-                    _a.trys.push([6, 8, , 9]);
+                    if (!!env_1.isInstallDisabled()) return [3 /*break*/, 10];
+                    _a.label = 7;
+                case 7:
+                    _a.trys.push([7, 9, , 10]);
                     log.info("Moving files", "");
                     return [4 /*yield*/, setupOpencv_1.installOpenCV()];
-                case 7:
-                    _a.sent();
-                    return [3 /*break*/, 9];
                 case 8:
+                    _a.sent();
+                    return [3 /*break*/, 10];
+                case 9:
                     e_1 = _a.sent();
                     log.error(e_1);
                     process.exit(1);
-                    return [3 /*break*/, 9];
-                case 9: return [2 /*return*/];
+                    return [3 /*break*/, 10];
+                case 10: return [2 /*return*/];
             }
         });
     });

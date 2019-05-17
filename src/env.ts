@@ -3,11 +3,11 @@ import * as os from 'os';
 const log = require('npmlog');
 
 export function isAutoBuildEnabled() {
-    return !!process.env.OPENCV_ENABLE_AUTOBUILD
+    return !!process.env.OPENCV_ENABLE_AUTOBUILD;
 }
 
-export function linkStatic() {
-    return !!process.env.OPENCV_LINK_STATIC || true;
+export function isInstallDisabled() {
+    return !!process.env.OPENCV_DISABLE_INSTALL;
 }
 
 export function buildWithCuda(): boolean {
