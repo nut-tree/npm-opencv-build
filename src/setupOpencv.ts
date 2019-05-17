@@ -132,12 +132,14 @@ export async function setupOpencv() {
 
 export async function installOpenCV() {
     if (existsSync(dirs.installedOpenCV)) {
-        throw new Error(`Failed to install, ${dirs.installedOpenCV} already exists.`)
+        log.info(`Directory ${dirs.installedOpenCV} already exists, assuming existing installation.`);
+        log.info(`Remove the existing directory to force a clean install.`);
+    } else {
+        log.info(`Installing to ${dirs.installedOpenCV}`, "");
+        await copy(dirs.opencvRoot, dirs.installedOpenCV, {
+            recursive: true,
+            errorOnExist: true,
+            overwrite: false
+        });
     }
-    log.info(`Installing to ${dirs.installedOpenCV}`, "");
-    await copy(dirs.opencvRoot, dirs.installedOpenCV, {
-        recursive: true,
-        errorOnExist: true,
-        overwrite: false
-    });
 }

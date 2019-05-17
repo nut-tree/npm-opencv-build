@@ -213,18 +213,21 @@ function installOpenCV() {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    if (fs_extra_1.existsSync(dirs_1.dirs.installedOpenCV)) {
-                        throw new Error("Failed to install, " + dirs_1.dirs.installedOpenCV + " already exists.");
-                    }
+                    if (!fs_extra_1.existsSync(dirs_1.dirs.installedOpenCV)) return [3 /*break*/, 1];
+                    log.info("Directory " + dirs_1.dirs.installedOpenCV + " already exists, assuming existing installation.");
+                    log.info("Remove the existing directory to force a clean install.");
+                    return [3 /*break*/, 3];
+                case 1:
                     log.info("Installing to " + dirs_1.dirs.installedOpenCV, "");
                     return [4 /*yield*/, fs_extra_1.copy(dirs_1.dirs.opencvRoot, dirs_1.dirs.installedOpenCV, {
                             recursive: true,
                             errorOnExist: true,
                             overwrite: false
                         })];
-                case 1:
+                case 2:
                     _a.sent();
-                    return [2 /*return*/];
+                    _a.label = 3;
+                case 3: return [2 /*return*/];
             }
         });
     });
