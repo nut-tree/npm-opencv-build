@@ -81,14 +81,10 @@ exports.defaultCmakeFlags = [
     "-DBUILD_JPEG=ON",
     "-DBUILD_ZLIB=ON",
     "-DBUILD_OPENEXR=ON",
-    "-DBUILD_IPP_IW=ON",
-    "-DBUILD_ITT=ON",
     "-DBUILD_USE_SYMLINKS=OFF",
-    "-DENABLE_PIC=ON",
     "-DWITH_JPEG=ON",
     "-DWITH_PNG=ON",
     "-DWITH_JASPER=ON",
     "-DWITH_TIFF=ON",
-    "-DWITH_FFMPEG=OFF",
     "-DWITH_VTK=OFF"
 ];

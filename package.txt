@@ -10,6 +10,7 @@ npm-opencv-build/setup_linux.sh
 npm-opencv-build/setup_osx.sh
 npm-opencv-build/tsconfig.json
 npm-opencv-build/build/
+npm-opencv-build/opencv/build/3rdparty/
 npm-opencv-build/opencv/build/bin/
 npm-opencv-build/opencv/build/lib/
 npm-opencv-build/opencv/build/include/
