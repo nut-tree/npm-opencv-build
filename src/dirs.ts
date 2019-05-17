@@ -17,9 +17,9 @@ const installDir = isWin() ? path.resolve('/') : isOSX() ? path.resolve('/usr/lo
 const installedOpenCV = path.resolve(path.join(installDir, 'opencv-prebuilt'));
 
 const installedOpencvBuild = path.join(installedOpenCV, 'build');
-const installedOpencvInclude = path.join(installedOpenCV, 'include');
-const installedOpencvLibDir = isWin() ? path.join(installedOpenCV, 'lib/Release') : path.join(installedOpenCV, 'lib');
-const installedOpencvBinDir = isWin() ? path.join(installedOpenCV, 'bin/Release') : path.join(installedOpenCV, 'bin');
+const installedOpencvInclude = path.join(installedOpencvBuild, 'include');
+const installedOpencvLibDir = isWin() ? path.join(installedOpencvBuild, 'lib/Release') : path.join(installedOpencvBuild, 'lib');
+const installedOpencvBinDir = isWin() ? path.join(installedOpencvBuild, 'bin/Release') : path.join(installedOpencvBuild, 'bin');
 
 export const dirs = {
   rootDir,
