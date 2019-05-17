@@ -3,7 +3,9 @@ import {dirs} from './dirs';
 import {buildWithCuda, isWithoutContrib, numberOfCoresAvailable, opencvVersion, parseAutoBuildFlags} from './env';
 import {findMsBuild} from './findMsBuild';
 import {exec, isCudaAvailable, isWin, spawn} from './utils';
-import {existsSync, copy} from "fs-extra";
+import {copy, existsSync} from "fs-extra";
+import {writeFileSync} from "fs";
+import {join} from "path";
 
 const log = require('npmlog');
 
@@ -17,10 +19,6 @@ function getMkDirCmd(dirname: string): string {
 
 function getRmDirCmd(dirname: string): string {
     return isWin() ? `${getIfExistsDirCmd(dirname)} rd /s /q ${dirname}` : `rm -rf ${dirname}`
-}
-
-function getCpDirCmd(src: string, dest: string): string {
-    return isWin() ? `Xcopy /E /I ${src} ${dest}` : `cp -r ${src} ${dest}`
 }
 
 function getMsbuildCmd(sln: string): string[] {
@@ -131,15 +129,35 @@ export async function setupOpencv() {
 }
 
 export async function installOpenCV() {
-    if (existsSync(dirs.installedOpenCV)) {
-        log.info(`Directory ${dirs.installedOpenCV} already exists, assuming existing installation.`);
+    if (existsSync(dirs.opencvInstallRoot)) {
+        log.info(`Directory ${dirs.opencvInstallRoot} already exists, assuming existing installation.`);
         log.info(`Remove the existing directory to force a clean install.`);
     } else {
-        log.info(`Installing to ${dirs.installedOpenCV}`, "");
-        await copy(dirs.opencvRoot, dirs.installedOpenCV, {
+        log.info(`Installing to ${dirs.opencvInstallRoot}`, "");
+        await copy(dirs.opencvRoot, dirs.opencvInstallRoot, {
             recursive: true,
             errorOnExist: true,
             overwrite: false
         });
+        writeVersionInfo(getPackageVersion());
     }
+}
+
+const getVersionInfoPath = () => join(dirs.opencvInstallRoot, "versioninfo.json");
+
+export function writeVersionInfo(version: string) {
+    writeFileSync(getVersionInfoPath(), JSON.stringify({version}));
+}
+
+export function readVersionInfo(): string | null {
+    try {
+        return require(getVersionInfoPath()).version;
+    } catch (e) {
+        return null;
+    }
+}
+
+export function getPackageVersion(): string {
+    const packageJson = require(join(__dirname, "../package.json"));
+    return `${packageJson.name}@${packageJson.version}`;
 }

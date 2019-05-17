@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var path = require("path");
 var utils_1 = require("./utils");
+var env_1 = require("./env");
 var rootDir = path.resolve(__dirname, '../');
 var opencvRoot = path.join(rootDir, 'opencv');
 var opencvSrc = path.join(opencvRoot, 'opencv');
@@ -21,17 +22,13 @@ var installedOpencvBinDir = utils_1.isWin() ? path.join(installedOpencvBuild, 'b
 exports.dirs = {
     rootDir: rootDir,
     opencvRoot: opencvRoot,
+    opencvInstallRoot: installedOpenCV,
     opencvSrc: opencvSrc,
     opencvContribSrc: opencvContribSrc,
     opencvContribModules: opencvContribModules,
-    opencvBuild: opencvBuild,
-    opencvInclude: opencvInclude,
-    opencvLibDir: opencvLibDir,
-    opencvBinDir: opencvBinDir,
-    autoBuildFile: autoBuildFile,
-    installedOpenCV: installedOpenCV,
-    installedOpencvBuild: installedOpencvBuild,
-    installedOpencvInclude: installedOpencvInclude,
-    installedOpencvLibDir: installedOpencvLibDir,
-    installedOpencvBinDir: installedOpencvBinDir
+    opencvBuild: env_1.isAutoBuildEnabled() ? opencvBuild : installedOpencvBuild,
+    opencvInclude: env_1.isAutoBuildEnabled() ? opencvInclude : installedOpencvInclude,
+    opencvLibDir: env_1.isAutoBuildEnabled() ? opencvLibDir : installedOpencvLibDir,
+    opencvBinDir: env_1.isAutoBuildEnabled() ? opencvBinDir : installedOpencvBinDir,
+    autoBuildFile: autoBuildFile
 };

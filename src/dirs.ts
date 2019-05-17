@@ -2,6 +2,8 @@ import * as path from 'path';
 
 import {isOSX, isWin} from './utils';
 
+import {isAutoBuildEnabled} from "./env";
+
 const rootDir = path.resolve(__dirname, '../');
 const opencvRoot = path.join(rootDir, 'opencv');
 const opencvSrc = path.join(opencvRoot, 'opencv');
@@ -24,17 +26,13 @@ const installedOpencvBinDir = isWin() ? path.join(installedOpencvBuild, 'bin/Rel
 export const dirs = {
   rootDir,
   opencvRoot,
+  opencvInstallRoot: installedOpenCV,
   opencvSrc,
   opencvContribSrc,
   opencvContribModules,
-  opencvBuild,
-  opencvInclude,
-  opencvLibDir,
-  opencvBinDir,
-  autoBuildFile,
-  installedOpenCV,
-  installedOpencvBuild,
-  installedOpencvInclude,
-  installedOpencvLibDir,
-  installedOpencvBinDir
+  opencvBuild: isAutoBuildEnabled() ? opencvBuild : installedOpencvBuild,
+  opencvInclude: isAutoBuildEnabled() ? opencvInclude : installedOpencvInclude,
+  opencvLibDir: isAutoBuildEnabled() ? opencvLibDir : installedOpencvLibDir,
+  opencvBinDir: isAutoBuildEnabled() ? opencvBinDir : installedOpencvBinDir,
+  autoBuildFile
 };

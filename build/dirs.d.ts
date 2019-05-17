@@ -1,6 +1,7 @@
 export declare const dirs: {
     rootDir: string;
     opencvRoot: string;
+    opencvInstallRoot: string;
     opencvSrc: string;
     opencvContribSrc: string;
     opencvContribModules: string;
@@ -9,9 +10,4 @@ export declare const dirs: {
     opencvLibDir: string;
     opencvBinDir: string;
     autoBuildFile: string;
-    installedOpenCV: string;
-    installedOpencvBuild: string;
-    installedOpencvInclude: string;
-    installedOpencvLibDir: string;
-    installedOpencvBinDir: string;
 };

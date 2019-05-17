@@ -41,6 +41,8 @@ var env_1 = require("./env");
 var findMsBuild_1 = require("./findMsBuild");
 var utils_1 = require("./utils");
 var fs_extra_1 = require("fs-extra");
+var fs_1 = require("fs");
+var path_1 = require("path");
 var log = require('npmlog');
 function getIfExistsDirCmd(dirname, exists) {
     if (exists === void 0) { exists = true; }
@@ -51,9 +53,6 @@ function getMkDirCmd(dirname) {
 }
 function getRmDirCmd(dirname) {
     return utils_1.isWin() ? getIfExistsDirCmd(dirname) + " rd /s /q " + dirname : "rm -rf " + dirname;
-}
-function getCpDirCmd(src, dest) {
-    return utils_1.isWin() ? "Xcopy /E /I " + src + " " + dest : "cp -r " + src + " " + dest;
 }
 function getMsbuildCmd(sln) {
     return [
@@ -213,19 +212,20 @@ function installOpenCV() {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    if (!fs_extra_1.existsSync(dirs_1.dirs.installedOpenCV)) return [3 /*break*/, 1];
-                    log.info("Directory " + dirs_1.dirs.installedOpenCV + " already exists, assuming existing installation.");
+                    if (!fs_extra_1.existsSync(dirs_1.dirs.opencvInstallRoot)) return [3 /*break*/, 1];
+                    log.info("Directory " + dirs_1.dirs.opencvInstallRoot + " already exists, assuming existing installation.");
                     log.info("Remove the existing directory to force a clean install.");
                     return [3 /*break*/, 3];
                 case 1:
-                    log.info("Installing to " + dirs_1.dirs.installedOpenCV, "");
-                    return [4 /*yield*/, fs_extra_1.copy(dirs_1.dirs.opencvRoot, dirs_1.dirs.installedOpenCV, {
+                    log.info("Installing to " + dirs_1.dirs.opencvInstallRoot, "");
+                    return [4 /*yield*/, fs_extra_1.copy(dirs_1.dirs.opencvRoot, dirs_1.dirs.opencvInstallRoot, {
                             recursive: true,
                             errorOnExist: true,
                             overwrite: false
                         })];
                 case 2:
                     _a.sent();
+                    writeVersionInfo(getPackageVersion());
                     _a.label = 3;
                 case 3: return [2 /*return*/];
             }
@@ -233,3 +233,22 @@ function installOpenCV() {
     });
 }
 exports.installOpenCV = installOpenCV;
+var getVersionInfoPath = function () { return path_1.join(dirs_1.dirs.opencvInstallRoot, "versioninfo.json"); };
+function writeVersionInfo(version) {
+    fs_1.writeFileSync(getVersionInfoPath(), JSON.stringify({ version: version }));
+}
+exports.writeVersionInfo = writeVersionInfo;
+function readVersionInfo() {
+    try {
+        return require(getVersionInfoPath()).version;
+    }
+    catch (e) {
+        return null;
+    }
+}
+exports.readVersionInfo = readVersionInfo;
+function getPackageVersion() {
+    var packageJson = require(path_1.join(__dirname, "../package.json"));
+    return packageJson.name + "@" + packageJson.version;
+}
+exports.getPackageVersion = getPackageVersion;
