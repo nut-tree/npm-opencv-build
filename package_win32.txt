@@ -4,6 +4,7 @@ npm-opencv-build\\appveyor.yml
 npm-opencv-build\\Find-VS2017.cs
 npm-opencv-build\\install.js
 npm-opencv-build\\preinstall.js
+npm-opencv-build\\preuninstall.js
 npm-opencv-build\\README.md
 npm-opencv-build\\setup_linux.sh
 npm-opencv-build\\setup_osx.sh
