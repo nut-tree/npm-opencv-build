@@ -135,19 +135,24 @@ export async function installOpenCV() {
             log.info(`Discovered version missmatch. Have: ${readVersionInfo()} Want: ${getPackageVersion()}`);
             log.info(`Removing previous installation.`);
             await exec(getRmDirCmd(dirs.opencvInstallRoot));
+            await copyOpenCV();
         } else {
             log.info(`Remove the existing directory to force a clean install.`);
         }
     } else {
         log.info(`Installing to ${dirs.opencvInstallRoot}`, "");
-        await copy(dirs.opencvRoot, dirs.opencvInstallRoot, {
-            recursive: true,
-            errorOnExist: true,
-            overwrite: false
-        });
-        writeVersionInfo(getPackageVersion());
+        await copyOpenCV();
     }
 }
+
+const copyOpenCV = async () => {
+    await copy(dirs.opencvRoot, dirs.opencvInstallRoot, {
+        recursive: true,
+        errorOnExist: true,
+        overwrite: false
+    });
+    writeVersionInfo(getPackageVersion());
+};
 
 const getVersionInfoPath = () => join(dirs.opencvInstallRoot, "versioninfo.json");
 
