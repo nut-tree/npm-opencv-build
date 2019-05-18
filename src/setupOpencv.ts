@@ -3,9 +3,6 @@ import {dirs} from './dirs';
 import {buildWithCuda, isWithoutContrib, numberOfCoresAvailable, opencvVersion, parseAutoBuildFlags} from './env';
 import {findMsBuild} from './findMsBuild';
 import {exec, isCudaAvailable, isWin, spawn} from './utils';
-import {copy, existsSync} from "fs-extra";
-import {writeFileSync} from "fs";
-import {join} from "path";
 
 const log = require('npmlog');
 
@@ -126,49 +123,4 @@ export async function setupOpencv() {
 
     await exec(getRmDirCmd('opencv'), {cwd: dirs.opencvRoot});
     await exec(getRmDirCmd('opencv_contrib'), {cwd: dirs.opencvRoot});
-}
-
-export async function installOpenCV() {
-    if (existsSync(dirs.opencvInstallRoot)) {
-        log.info(`Directory ${dirs.opencvInstallRoot} already exists, assuming existing installation.`);
-        if (readVersionInfo() === null || readVersionInfo() !== getPackageVersion()) {
-            log.info(`Discovered version missmatch. Have: ${readVersionInfo()} Want: ${getPackageVersion()}`);
-            log.info(`Removing previous installation.`);
-            await exec(getRmDirCmd(dirs.opencvInstallRoot));
-            await copyOpenCV();
-        } else {
-            log.info(`Remove the existing directory to force a clean install.`);
-        }
-    } else {
-        log.info(`Installing to ${dirs.opencvInstallRoot}`, "");
-        await copyOpenCV();
-    }
-}
-
-const copyOpenCV = async () => {
-    await copy(dirs.opencvRoot, dirs.opencvInstallRoot, {
-        recursive: true,
-        errorOnExist: true,
-        overwrite: false
-    });
-    writeVersionInfo(getPackageVersion());
-};
-
-const getVersionInfoPath = () => join(dirs.opencvInstallRoot, "versioninfo.json");
-
-export function writeVersionInfo(version: string) {
-    writeFileSync(getVersionInfoPath(), JSON.stringify({version}));
-}
-
-export function readVersionInfo(): string | null {
-    try {
-        return require(getVersionInfoPath()).version;
-    } catch (e) {
-        return null;
-    }
-}
-
-export function getPackageVersion(): string {
-    const packageJson = require(join(__dirname, "../package.json"));
-    return `${packageJson.name}@${packageJson.version}`;
 }

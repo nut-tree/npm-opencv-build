@@ -1,5 +1,5 @@
 import {autoBuildFlags, isAutoBuildEnabled, isInstallDisabled, isWithoutContrib, opencvVersion} from "./env";
-import {installOpenCV, setupOpencv} from "./setupOpencv";
+import {setupOpencv} from "./setupOpencv";
 import {requireCmake, requireGit} from "./utils";
 
 const log = require("npmlog");
@@ -24,15 +24,6 @@ export async function install() {
             await setupOpencv();
         } catch (err) {
             log.error(err);
-            process.exit(1);
-        }
-    }
-    if (!isInstallDisabled()) {
-        try {
-            log.info("Moving files", "");
-            await installOpenCV();
-        } catch (e) {
-            log.error(e);
             process.exit(1);
         }
     }

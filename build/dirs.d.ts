@@ -1,7 +1,6 @@
 export declare const dirs: {
     rootDir: string;
     opencvRoot: string;
-    opencvInstallRoot: string;
     opencvSrc: string;
     opencvContribSrc: string;
     opencvContribModules: string;

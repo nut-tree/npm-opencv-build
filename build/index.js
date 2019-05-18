@@ -15,5 +15,4 @@ exports.opencvInclude = dirs_1.dirs.opencvInclude;
 exports.opencvLibDir = dirs_1.dirs.opencvLibDir;
 exports.opencvBinDir = dirs_1.dirs.opencvBinDir;
 exports.opencvBuildDir = dirs_1.dirs.opencvBuild;
-exports.installedOpenCV = dirs_1.dirs.opencvInstallRoot;
 exports.getLibs = getLibsFactory_1.getLibsFactory({ isWin: utils_1.isWin, isOSX: utils_1.isOSX, opencvModules: constants_1.opencvModules, path: path, fs: fs });
