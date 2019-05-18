@@ -212,22 +212,31 @@ function installOpenCV() {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    if (!fs_extra_1.existsSync(dirs_1.dirs.opencvInstallRoot)) return [3 /*break*/, 1];
+                    if (!fs_extra_1.existsSync(dirs_1.dirs.opencvInstallRoot)) return [3 /*break*/, 4];
                     log.info("Directory " + dirs_1.dirs.opencvInstallRoot + " already exists, assuming existing installation.");
-                    log.info("Remove the existing directory to force a clean install.");
-                    return [3 /*break*/, 3];
+                    if (!(readVersionInfo() === null || readVersionInfo() !== getPackageVersion())) return [3 /*break*/, 2];
+                    log.info("Discovered version missmatch. Have: " + readVersionInfo() + " Want: " + getPackageVersion());
+                    log.info("Removing previous installation.");
+                    return [4 /*yield*/, utils_1.exec(getRmDirCmd(dirs_1.dirs.opencvInstallRoot))];
                 case 1:
+                    _a.sent();
+                    return [3 /*break*/, 3];
+                case 2:
+                    log.info("Remove the existing directory to force a clean install.");
+                    _a.label = 3;
+                case 3: return [3 /*break*/, 6];
+                case 4:
                     log.info("Installing to " + dirs_1.dirs.opencvInstallRoot, "");
                     return [4 /*yield*/, fs_extra_1.copy(dirs_1.dirs.opencvRoot, dirs_1.dirs.opencvInstallRoot, {
                             recursive: true,
                             errorOnExist: true,
                             overwrite: false
                         })];
-                case 2:
+                case 5:
                     _a.sent();
                     writeVersionInfo(getPackageVersion());
-                    _a.label = 3;
-                case 3: return [2 /*return*/];
+                    _a.label = 6;
+                case 6: return [2 /*return*/];
             }
         });
     });

@@ -131,7 +131,13 @@ export async function setupOpencv() {
 export async function installOpenCV() {
     if (existsSync(dirs.opencvInstallRoot)) {
         log.info(`Directory ${dirs.opencvInstallRoot} already exists, assuming existing installation.`);
-        log.info(`Remove the existing directory to force a clean install.`);
+        if (readVersionInfo() === null || readVersionInfo() !== getPackageVersion()) {
+            log.info(`Discovered version missmatch. Have: ${readVersionInfo()} Want: ${getPackageVersion()}`);
+            log.info(`Removing previous installation.`);
+            await exec(getRmDirCmd(dirs.opencvInstallRoot));
+        } else {
+            log.info(`Remove the existing directory to force a clean install.`);
+        }
     } else {
         log.info(`Installing to ${dirs.opencvInstallRoot}`, "");
         await copy(dirs.opencvRoot, dirs.opencvInstallRoot, {
