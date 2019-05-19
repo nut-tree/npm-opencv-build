@@ -5,8 +5,8 @@
   "main": "./build/index.js",
   "scripts": {
     "build": "rm -rf build && tsc",
-    "prepublishOnly": "node prepublish.js",
-    "install": "node ./install.js",
+    "preinstall": "node preinstall.js",
+    "install": "node install.js",
     "test": "mocha --recursive ./test"
   },
   "repository": {
