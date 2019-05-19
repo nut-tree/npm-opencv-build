@@ -1,12 +1,11 @@
 {
   "name": "@nut-tree/opencv-build",
-  "version": "3.4.6-local",
+  "version": "3.4.6-patch",
   "description": "A simple script to auto build recent OpenCV + contrib version via npm. Based on [justadudewhohacks/npm-opencv-build](https://github.com/justadudewhohacks/npm-opencv-build)",
   "main": "./build/index.js",
   "scripts": {
     "build": "rm -rf build && tsc",
-    "preinstall": "node ./preinstall.js",
-    "preuninstall": "node ./preuninstall.js",
+    "prepublishOnly": "node prepublish.js",
     "install": "node ./install.js",
     "test": "mocha --recursive ./test"
   },
