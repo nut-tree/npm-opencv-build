@@ -32,7 +32,7 @@ function parseAutoBuildFlags() {
 }
 exports.parseAutoBuildFlags = parseAutoBuildFlags;
 function opencvVersion() {
-    return process.env.OPENCV_AUTOBUILD_VERSION || '3.4.6';
+    return process.env.OPENCV_AUTOBUILD_VERSION || '4.1.0';
 }
 exports.opencvVersion = opencvVersion;
 function numberOfCoresAvailable() {

@@ -32,9 +32,9 @@ export function parseAutoBuildFlags(): string[] {
 }
 
 export function opencvVersion() {
-    return process.env.OPENCV_AUTOBUILD_VERSION || '3.4.6'
+    return process.env.OPENCV_AUTOBUILD_VERSION || '4.1.0'
 }
 
 export function numberOfCoresAvailable() {
-    return os.cpus().length
+  return os.cpus().length
 }

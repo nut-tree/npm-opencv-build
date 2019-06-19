@@ -1,11 +1,18 @@
 language: node_js
-node_js:
-  - 10
+
 sudo: required
+
 matrix:
   include:
-    - os: linux
     - os: osx
+      node_js: 10
+      env:
+        - OPENCV4NODEJS_AUTOBUILD_OPENCV_VERSION=4.1.0
+    - os: linux
+      node_js: 10
+      env:
+        - OPENCV4NODEJS_AUTOBUILD_OPENCV_VERSION=4.1.0
+
 before_install:
   - "./setup_${TRAVIS_OS_NAME}.sh"
 install:

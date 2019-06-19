@@ -1,6 +1,6 @@
 {
   "name": "@nut-tree/opencv-build",
-  "version": "3.4.6-patch",
+  "version": "4.1.0-beta1",
   "description": "A simple script to auto build recent OpenCV + contrib version via npm. Based on [justadudewhohacks/npm-opencv-build](https://github.com/justadudewhohacks/npm-opencv-build)",
   "main": "./build/index.js",
   "scripts": {
