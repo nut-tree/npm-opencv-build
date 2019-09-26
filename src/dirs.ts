@@ -1,6 +1,6 @@
 import * as path from 'path';
 
-import {isWin} from './utils';
+import { isWin } from './utils';
 
 const rootDir = path.resolve(__dirname, '../')
 const opencvRoot = path.join(rootDir, 'opencv')
@@ -26,4 +26,4 @@ export const dirs = {
   opencvLibDir,
   opencvBinDir,
   autoBuildFile
-};
+}

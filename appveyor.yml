@@ -27,7 +27,6 @@ build: off
 test_script:
   # install and run tests of npm-opencv-build
   - cd c:\projects\npm-opencv-build
-  - SET OPENCV_ENABLE_AUTOBUILD=1
   - SET OPENCV4NODEJS_AUTOBUILD_OPENCV_VERSION=4.1.0
   - npm install
   - npm test

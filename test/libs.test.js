@@ -147,19 +147,4 @@ describe('libs', () => {
     expect(res.some(({ libPath }) => libPath === dnnObjdetectLibFile)).to.be.false
   })
 
-  it('should only link .a files with exact name match', () => {
-    const objdetectLibFile = 'libopencv_objdetect.a'
-    const dnnObjdetectLibFile = 'libopencv_dnn_objdetect.a'
-    const libFiles = [
-      objdetectLibFile,
-      dnnObjdetectLibFile
-    ]
-
-    const getLibs = createFake(libFiles, { isOSX: true })
-    const res = getLibs()
-    expect(res).to.be.an('array').lengthOf(opencvModules.length)
-    expect(res.some(({ opencvModule }) => opencvModule === 'objdetect'))
-    expect(res.find(l => l.opencvModule === 'objdetect')).to.have.property('libPath').to.equal(objdetectLibFile)
-    expect(res.some(({ libPath }) => libPath === dnnObjdetectLibFile)).to.be.false
-  })
 })

@@ -1,7 +1,7 @@
 {
-  "name": "@nut-tree/opencv-build",
-  "version": "4.1.0-beta1",
-  "description": "A simple script to auto build recent OpenCV + contrib version via npm. Based on [justadudewhohacks/npm-opencv-build](https://github.com/justadudewhohacks/npm-opencv-build)",
+  "name": "opencv-build",
+  "version": "0.1.9",
+  "description": "A simple script to auto build recent OpenCV + contrib version via npm",
   "main": "./build/index.js",
   "scripts": {
     "build": "rm -rf build && tsc",
@@ -11,26 +11,30 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nut-tree/npm-opencv-build.git"
+    "url": "git+https://github.com/justadudewhohacks/npm-opencv-build.git"
   },
   "keywords": [
     "opencv",
     "build",
     "opencv4nodejs"
   ],
-  "author": "s1hofmann",
+  "author": "justadudewhohacks",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/nut-tree/npm-opencv-build/issues"
+    "url": "https://github.com/justadudewhohacks/npm-opencv-build/issues"
   },
-  "homepage": "https://github.com/nut-tree/npm-opencv-build#readme",
+  "homepage": "https://github.com/justadudewhohacks/npm-opencv-build#readme",
+  "opencv4nodejs": {
+    "autoBuildWithoutContrib": 1,
+    "autoBuildFlags": "-DBUILD_opencv_world=1 -DBUILD_LIST=core,highgui"
+  },
   "dependencies": {
     "npmlog": "^4.1.2"
   },
   "devDependencies": {
-    "@types/node": "^12.0.0",
+    "@types/node": "^12.7.8",
     "chai": "^4.2.0",
-    "mocha": "^6.1.4",
-    "typescript": "^3.4.5"
+    "mocha": "^6.2.0",
+    "typescript": "^3.6.3"
   }
 }

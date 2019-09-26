@@ -7,7 +7,7 @@ function getLibsFactory(args) {
         return isWin() ? 'opencv_' : 'libopencv_';
     }
     function getLibSuffix() {
-        return isWin() ? 'lib' : (isOSX() ? '(dylib|a)' : '(so|a)');
+        return isWin() ? 'lib' : (isOSX() ? 'dylib' : 'so');
     }
     function getLibNameRegex(opencvModuleName) {
         return new RegExp("^" + getLibPrefix() + opencvModuleName + "[0-9]{0,3}." + getLibSuffix() + "$");

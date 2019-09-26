@@ -1,9 +1,10 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -35,32 +36,30 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var fs = require("fs");
 var path = require("path");
+var _1 = require(".");
 var constants_1 = require("./constants");
 var dirs_1 = require("./dirs");
 var env_1 = require("./env");
 var findMsBuild_1 = require("./findMsBuild");
 var utils_1 = require("./utils");
-var log = require("npmlog");
+var log = require('npmlog');
 function getIfExistsDirCmd(dirname, exists) {
     if (exists === void 0) { exists = true; }
-    return utils_1.isWin() ? "if " + (!exists ? "not " : "") + "exist " + dirname : "";
+    return utils_1.isWin() ? "if " + (!exists ? 'not ' : '') + "exist " + dirname : '';
 }
 function getMkDirCmd(dirname) {
-    return utils_1.isWin()
-        ? getIfExistsDirCmd(dirname, false) + " mkdir " + dirname
-        : "mkdir -p " + dirname;
+    return utils_1.isWin() ? getIfExistsDirCmd(dirname, false) + " mkdir " + dirname : "mkdir -p " + dirname;
 }
 function getRmDirCmd(dirname) {
-    return utils_1.isWin()
-        ? getIfExistsDirCmd(dirname) + " rd /s /q " + dirname
-        : "rm -rf " + dirname;
+    return utils_1.isWin() ? getIfExistsDirCmd(dirname) + " rd /s /q " + dirname : "rm -rf " + dirname;
 }
 function getMsbuildCmd(sln) {
     return [
         sln,
-        "/p:Configuration=Release",
-        "/p:Platform=" + (process.arch === "x64" ? "x64" : "x86")
+        '/p:Configuration=Release',
+        "/p:Platform=" + (process.arch === 'x64' ? 'x64' : 'x86')
     ];
 }
 function getRunBuildCmd(msbuildExe) {
@@ -69,14 +68,10 @@ function getRunBuildCmd(msbuildExe) {
         return function () { return __awaiter(_this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, utils_1.spawn("" + msbuildExe, getMsbuildCmd("./OpenCV.sln"), {
-                            cwd: dirs_1.dirs.opencvBuild
-                        })];
+                    case 0: return [4 /*yield*/, utils_1.spawn("" + msbuildExe, getMsbuildCmd('./OpenCV.sln'), { cwd: dirs_1.dirs.opencvBuild })];
                     case 1:
                         _a.sent();
-                        return [4 /*yield*/, utils_1.spawn("" + msbuildExe, getMsbuildCmd("./INSTALL.vcxproj"), {
-                                cwd: dirs_1.dirs.opencvBuild
-                            })];
+                        return [4 /*yield*/, utils_1.spawn("" + msbuildExe, getMsbuildCmd('./INSTALL.vcxproj'), { cwd: dirs_1.dirs.opencvBuild })];
                     case 2:
                         _a.sent();
                         return [2 /*return*/];
@@ -87,15 +82,13 @@ function getRunBuildCmd(msbuildExe) {
     return function () { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, utils_1.spawn("make", ["install", "-j" + env_1.numberOfCoresAvailable()], {
-                        cwd: dirs_1.dirs.opencvBuild
-                    })];
+                case 0: return [4 /*yield*/, utils_1.spawn('make', ['install', "-j" + env_1.numberOfCoresAvailable()], { cwd: dirs_1.dirs.opencvBuild })
+                    // revert the strange archiving of libopencv.so going on with make install
+                ];
                 case 1:
                     _a.sent();
                     // revert the strange archiving of libopencv.so going on with make install
-                    return [4 /*yield*/, utils_1.spawn("make", ["all", "-j" + env_1.numberOfCoresAvailable()], {
-                            cwd: dirs_1.dirs.opencvBuild
-                        })];
+                    return [4 /*yield*/, utils_1.spawn('make', ['all', "-j" + env_1.numberOfCoresAvailable()], { cwd: dirs_1.dirs.opencvBuild })];
                 case 2:
                     // revert the strange archiving of libopencv.so going on with make install
                     _a.sent();
@@ -106,21 +99,21 @@ function getRunBuildCmd(msbuildExe) {
 }
 function getCudaCmakeFlags() {
     return [
-        "-DWITH_CUDA=ON",
-        "-DBUILD_opencv_cudacodec=OFF",
-        "-DCUDA_FAST_MATH=ON",
-        "-DWITH_CUBLAS=ON" // optional
+        '-DWITH_CUDA=ON',
+        '-DBUILD_opencv_cudacodec=OFF',
+        '-DCUDA_FAST_MATH=ON',
+        '-DWITH_CUBLAS=ON',
     ];
 }
 function getSharedCmakeFlags() {
     var conditionalFlags = env_1.isWithoutContrib()
         ? []
         : [
-            "-DOPENCV_ENABLE_NONFREE=ON",
+            '-DOPENCV_ENABLE_NONFREE=ON',
             "-DOPENCV_EXTRA_MODULES_PATH=" + dirs_1.dirs.opencvContribModules
         ];
     if (env_1.buildWithCuda() && utils_1.isCudaAvailable()) {
-        log.info("install", "Adding CUDA flags...");
+        log.info('install', 'Adding CUDA flags...');
         conditionalFlags = conditionalFlags.concat(getCudaCmakeFlags());
     }
     return constants_1.defaultCmakeFlags
@@ -136,7 +129,10 @@ function getWinCmakeFlags(msversion) {
     if (!cmakeArch) {
         throw new Error("no cmake arch found for process.arch: " + process.arch);
     }
-    return ["-G", "" + cmakeVsCompiler + cmakeArch].concat(getSharedCmakeFlags());
+    return [
+        '-G',
+        "" + cmakeVsCompiler + cmakeArch
+    ].concat(getSharedCmakeFlags());
 }
 function getCmakeArgs(cmakeFlags) {
     return [dirs_1.dirs.opencvSrc].concat(cmakeFlags);
@@ -151,39 +147,49 @@ function getMsbuildIfWin() {
                     return [4 /*yield*/, findMsBuild_1.findMsBuild()];
                 case 1:
                     msbuild = _a.sent();
-                    log.info("install", "using msbuild:", msbuild);
+                    log.info('install', 'using msbuild:', msbuild);
                     return [2 /*return*/, msbuild];
                 case 2: return [2 /*return*/];
             }
         });
     });
 }
+function writeAutoBuildFile() {
+    var autoBuildFile = {
+        opencvVersion: env_1.opencvVersion(),
+        autoBuildFlags: env_1.autoBuildFlags(),
+        modules: _1.getLibs(dirs_1.dirs.opencvLibDir)
+    };
+    log.info('install', 'writing auto-build file into directory: %s', dirs_1.dirs.autoBuildFile);
+    log.info('install', autoBuildFile);
+    fs.writeFileSync(dirs_1.dirs.autoBuildFile, JSON.stringify(autoBuildFile));
+}
 function setupOpencv() {
     return __awaiter(this, void 0, void 0, function () {
         var msbuild, cMakeFlags, tag, cmakeArgs, rmOpenCV, err_1, rmOpenCVContrib, err_2;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, getMsbuildIfWin()];
+                case 0: return [4 /*yield*/, getMsbuildIfWin()
+                    // Get cmake flags here to check for CUDA early on instead of the start of the building process
+                ];
                 case 1:
                     msbuild = _a.sent();
-                    cMakeFlags = utils_1.isWin()
-                        ? getWinCmakeFlags(msbuild.version)
-                        : getSharedCmakeFlags();
+                    cMakeFlags = utils_1.isWin() ? getWinCmakeFlags(msbuild.version) : getSharedCmakeFlags();
                     tag = env_1.opencvVersion();
-                    log.info("install", "installing opencv version %s into directory: %s", tag, dirs_1.dirs.opencvRoot);
-                    return [4 /*yield*/, utils_1.exec(getMkDirCmd("opencv"), { cwd: dirs_1.dirs.rootDir })];
+                    log.info('install', 'installing opencv version %s into directory: %s', tag, dirs_1.dirs.opencvRoot);
+                    return [4 /*yield*/, utils_1.exec(getMkDirCmd('opencv'), { cwd: dirs_1.dirs.rootDir })];
                 case 2:
                     _a.sent();
-                    return [4 /*yield*/, utils_1.exec(getRmDirCmd("build"), { cwd: dirs_1.dirs.opencvRoot })];
+                    return [4 /*yield*/, utils_1.exec(getRmDirCmd('build'), { cwd: dirs_1.dirs.opencvRoot })];
                 case 3:
                     _a.sent();
-                    return [4 /*yield*/, utils_1.exec(getMkDirCmd("build"), { cwd: dirs_1.dirs.opencvRoot })];
+                    return [4 /*yield*/, utils_1.exec(getMkDirCmd('build'), { cwd: dirs_1.dirs.opencvRoot })];
                 case 4:
                     _a.sent();
-                    return [4 /*yield*/, utils_1.exec(getRmDirCmd("opencv"), { cwd: dirs_1.dirs.opencvRoot })];
+                    return [4 /*yield*/, utils_1.exec(getRmDirCmd('opencv'), { cwd: dirs_1.dirs.opencvRoot })];
                 case 5:
                     _a.sent();
-                    return [4 /*yield*/, utils_1.exec(getRmDirCmd("opencv_contrib"), { cwd: dirs_1.dirs.opencvRoot })];
+                    return [4 /*yield*/, utils_1.exec(getRmDirCmd('opencv_contrib'), { cwd: dirs_1.dirs.opencvRoot })];
                 case 6:
                     _a.sent();
                     if (!env_1.isWithoutContrib()) return [3 /*break*/, 7];
@@ -197,50 +203,45 @@ function setupOpencv() {
                 case 10:
                     _a.sent();
                     cmakeArgs = getCmakeArgs(cMakeFlags);
-                    log.info("install", "running cmake %s", cmakeArgs);
-                    return [4 /*yield*/, utils_1.spawn("cmake", cmakeArgs, { cwd: dirs_1.dirs.opencvBuild })];
+                    log.info('install', 'running cmake %s', cmakeArgs);
+                    return [4 /*yield*/, utils_1.spawn('cmake', cmakeArgs, { cwd: dirs_1.dirs.opencvBuild })];
                 case 11:
                     _a.sent();
-                    log.info("install", "starting build...");
+                    log.info('install', 'starting build...');
                     return [4 /*yield*/, getRunBuildCmd(utils_1.isWin() ? msbuild.path : undefined)()];
                 case 12:
                     _a.sent();
-                    return [4 /*yield*/, utils_1.spawn("cmake", getCmakeArgs(cMakeFlags), { cwd: dirs_1.dirs.opencvBuild })];
+                    writeAutoBuildFile();
+                    rmOpenCV = getRmDirCmd('opencv');
+                    _a.label = 13;
                 case 13:
-                    _a.sent();
-                    return [4 /*yield*/, getRunBuildCmd(utils_1.isWin() ? msbuild.path : undefined)()];
+                    _a.trys.push([13, 15, , 16]);
+                    return [4 /*yield*/, utils_1.exec(rmOpenCV, { cwd: dirs_1.dirs.opencvRoot })];
                 case 14:
                     _a.sent();
-                    rmOpenCV = getRmDirCmd("opencv");
-                    _a.label = 15;
+                    return [3 /*break*/, 16];
                 case 15:
-                    _a.trys.push([15, 17, , 18]);
-                    return [4 /*yield*/, utils_1.exec(rmOpenCV, { cwd: dirs_1.dirs.opencvRoot })];
-                case 16:
-                    _a.sent();
-                    return [3 /*break*/, 18];
-                case 17:
                     err_1 = _a.sent();
-                    log.error("install", "failed to clean opencv source folder:", err_1);
-                    log.error("install", "command was: %s", rmOpenCV);
-                    log.error("install", "consider removing the folder yourself: %s", path.join(dirs_1.dirs.opencvRoot, "opencv"));
-                    return [3 /*break*/, 18];
-                case 18:
-                    rmOpenCVContrib = getRmDirCmd("opencv_contrib");
-                    _a.label = 19;
-                case 19:
-                    _a.trys.push([19, 21, , 22]);
+                    log.error('install', 'failed to clean opencv source folder:', err_1);
+                    log.error('install', 'command was: %s', rmOpenCV);
+                    log.error('install', 'consider removing the folder yourself: %s', path.join(dirs_1.dirs.opencvRoot, 'opencv'));
+                    return [3 /*break*/, 16];
+                case 16:
+                    rmOpenCVContrib = getRmDirCmd('opencv_contrib');
+                    _a.label = 17;
+                case 17:
+                    _a.trys.push([17, 19, , 20]);
                     return [4 /*yield*/, utils_1.exec(rmOpenCVContrib, { cwd: dirs_1.dirs.opencvRoot })];
-                case 20:
+                case 18:
                     _a.sent();
-                    return [3 /*break*/, 22];
-                case 21:
+                    return [3 /*break*/, 20];
+                case 19:
                     err_2 = _a.sent();
-                    log.error("install", "failed to clean opencv_contrib source folder:", err_2);
-                    log.error("install", "command was: %s", rmOpenCV);
-                    log.error("install", "consider removing the folder yourself: %s", path.join(dirs_1.dirs.opencvRoot, "opencv_contrib"));
-                    return [3 /*break*/, 22];
-                case 22: return [2 /*return*/];
+                    log.error('install', 'failed to clean opencv_contrib source folder:', err_2);
+                    log.error('install', 'command was: %s', rmOpenCV);
+                    log.error('install', 'consider removing the folder yourself: %s', path.join(dirs_1.dirs.opencvRoot, 'opencv_contrib'));
+                    return [3 /*break*/, 20];
+                case 20: return [2 /*return*/];
             }
         });
     });
