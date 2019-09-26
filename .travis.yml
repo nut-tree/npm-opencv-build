@@ -7,16 +7,16 @@ matrix:
     - os: osx
       node_js: 10
       env:
-        - OPENCV4NODEJS_AUTOBUILD_OPENCV_VERSION=4.1.0
+        - OPENCV4NODEJS_AUTOBUILD_OPENCV_VERSION=4.1.1
     - os: linux
       node_js: 10
       env:
-        - OPENCV4NODEJS_AUTOBUILD_OPENCV_VERSION=4.1.0
+        - OPENCV4NODEJS_AUTOBUILD_OPENCV_VERSION=4.1.1
 
 before_install:
   - "./setup_${TRAVIS_OS_NAME}.sh"
 install:
-  - OPENCV_ENABLE_AUTOBUILD=1 npm install
+  - npm install
   - npm test
 
 before_deploy:
