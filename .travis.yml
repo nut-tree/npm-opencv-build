@@ -22,7 +22,7 @@ install:
 before_deploy:
   - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
   - npm whoami
-  - bsdtar -czf opencv-build.tar -h -C .. -T package.txt
+  - bsdtar -czf opencv-build.tar -h -C .. -T "package_${TRAVIS_OS_NAME}.txt"
 
 deploy:
   provider: script
@@ -30,4 +30,3 @@ deploy:
   script: npm publish opencv-build.tar
   on:
     tags: true
-    branch: master
