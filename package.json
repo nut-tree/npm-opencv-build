@@ -1,6 +1,6 @@
 {
   "name": "opencv-build",
-  "version": "0.1.9",
+  "version": "4.1.1-beta1",
   "description": "A simple script to auto build recent OpenCV + contrib version via npm",
   "main": "./build/index.js",
   "scripts": {
@@ -11,19 +11,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/justadudewhohacks/npm-opencv-build.git"
+    "url": "git+https://github.com/nut-tree/npm-opencv-build.git"
   },
   "keywords": [
     "opencv",
     "build",
     "opencv4nodejs"
   ],
-  "author": "justadudewhohacks",
-  "license": "MIT",
+  "author": "Simon Hofmann <dev@simon-hofmann.org",
+  "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/justadudewhohacks/npm-opencv-build/issues"
+    "url": "https://github.com/nut-tree/npm-opencv-build/issues"
   },
-  "homepage": "https://github.com/justadudewhohacks/npm-opencv-build#readme",
+  "homepage": "https://github.com/nut-tree/npm-opencv-build#readme",
   "opencv4nodejs": {
     "autoBuildWithoutContrib": 1,
     "autoBuildFlags": "-DBUILD_opencv_world=1 -DBUILD_LIST=core,highgui"
