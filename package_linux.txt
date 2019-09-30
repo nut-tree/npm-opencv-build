@@ -12,4 +12,10 @@ npm-opencv-build/build/
 npm-opencv-build/opencv/build/bin/
 npm-opencv-build/opencv/build/lib/libopencv_world.so
 npm-opencv-build/opencv/build/lib/libopencv_world.so.4.1
+npm-opencv-build/opencv/build/lib/libopencv_core.so
+npm-opencv-build/opencv/build/lib/libopencv_core.so.4.1
+npm-opencv-build/opencv/build/lib/libopencv_imgcodecs.so
+npm-opencv-build/opencv/build/lib/libopencv_imgcodecs.so.4.1
+npm-opencv-build/opencv/build/lib/libopencv_imgproc.so
+npm-opencv-build/opencv/build/lib/libopencv_imgproc.so.4.1
 npm-opencv-build/opencv/build/include/

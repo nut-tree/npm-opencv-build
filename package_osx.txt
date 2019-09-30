@@ -10,6 +10,10 @@ npm-opencv-build/setup_osx.sh
 npm-opencv-build/tsconfig.json
 npm-opencv-build/build/
 npm-opencv-build/opencv/build/bin/
-npm-opencv-build/opencv/build/lib/libopencv_world.dylib
-npm-opencv-build/opencv/build/lib/libopencv_world.4.1.dylib
+npm-opencv-build/opencv/build/lib/libopencv_core.dylib
+npm-opencv-build/opencv/build/lib/libopencv_core.4.1.dylib
+npm-opencv-build/opencv/build/lib/libopencv_imgcodecs.dylib
+npm-opencv-build/opencv/build/lib/libopencv_imgcodecs.4.1.dylib
+npm-opencv-build/opencv/build/lib/libopencv_imgproc.dylib
+npm-opencv-build/opencv/build/lib/libopencv_imgproc.4.1.dylib
 npm-opencv-build/opencv/build/include/
