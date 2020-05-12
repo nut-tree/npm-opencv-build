@@ -35,7 +35,7 @@ test_script:
   - cd opencv4nodejs
   - set OPENCV4NODEJS_PREBUILT_SKIP_DEPENDENCIES=1
   # install new opencv-build version
-  - npm install ../opencv-build
+  - npm install ../npm-opencv-build
   - npm install
   - cd test
   - npm install
