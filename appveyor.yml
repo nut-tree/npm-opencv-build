@@ -30,22 +30,19 @@ test_script:
   - SET OPENCV4NODEJS_AUTOBUILD_OPENCV_VERSION=4.1.1
   - npm install
   - npm test
+  - cd c:\projects
+  - git clone https://github.com/nut-tree/opencv4nodejs
+  - cd opencv4nodejs
+  - set OPENCV4NODEJS_PREBUILT_SKIP_DEPENDENCIES=1
+  # install new opencv-build version
+  - npm install ../opencv-build
+  - npm install
+  - cd test
+  - npm install
+  - npm run test-appveyor
+  - set "OPENCV4NODEJS_PREBUILT_SKIP_DEPENDENCIES="
 
 on_success:
   - cmd: cd c:\projects\npm-opencv-build
   - tar -czf opencv-build.tar -h -C .. -T package_win32.txt
   - IF defined APPVEYOR_REPO_TAG_NAME npm publish opencv-build.tar
-
-  # install opencv4nodejs and run tests
-  # - cd c:\projects
-  # - git clone https://github.com/nut-tree/opencv4nodejs
-  # - cd opencv4nodejs
-  # - git checkout opencv-prebuilt
-  # uninstall npm version of opencv-build
-  # - npm uninstall opencv-build
-  # install new opencv-build version
-  # - npm install ../opencv-build
-  # - npm install
-  # - cd test
-  # - npm install
-  # - npm run test-appveyor
