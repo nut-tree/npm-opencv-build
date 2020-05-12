@@ -22,13 +22,12 @@ install:
   - npm whoami
   - SET PATH=%PATH%;C:\Program Files\CMake\bin;
 
-build: off
-
-test_script:
-  # install and run tests of npm-opencv-build
+build_script:
   - cd c:\projects\npm-opencv-build
   - SET OPENCV4NODEJS_AUTOBUILD_OPENCV_VERSION=4.1.1
   - npm install
+
+test_script:
   - npm test
   - cd c:\projects
   - git clone https://github.com/nut-tree/opencv4nodejs

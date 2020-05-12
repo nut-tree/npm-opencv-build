@@ -17,6 +17,8 @@ before_install:
   - "./setup_${TRAVIS_OS_NAME}.sh"
 install:
   - npm install
+
+script:
   - npm test
   - cd $TRAVIS_BUILD_DIR/..
   - git clone https://github.com/nut-tree/opencv4nodejs
@@ -33,6 +35,7 @@ install:
 before_deploy:
   - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
   - npm whoami
+  - cd $TRAVIS_BUILD_DIR
   - bsdtar -czf opencv-build.tar -h -C .. -T "package_${TRAVIS_OS_NAME}.txt"
 
 deploy:
