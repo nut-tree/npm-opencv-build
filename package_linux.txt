@@ -1,6 +1,4 @@
 npm-opencv-build/package.json
-npm-opencv-build/.travis.yml
-npm-opencv-build/appveyor.yml
 npm-opencv-build/Find-VS2017.cs
 npm-opencv-build/install.js
 npm-opencv-build/preinstall.js
@@ -10,6 +8,5 @@ npm-opencv-build/setup_osx.sh
 npm-opencv-build/tsconfig.json
 npm-opencv-build/build/
 npm-opencv-build/opencv/build/bin/
-npm-opencv-build/opencv/build/lib/libopencv_world.so
 npm-opencv-build/opencv/build/lib/libopencv_world.so.4.1
 npm-opencv-build/opencv/build/include/
