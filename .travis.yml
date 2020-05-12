@@ -18,6 +18,17 @@ before_install:
 install:
   - npm install
   - npm test
+  - cd $TRAVIS_BUILD_DIR/..
+  - git clone https://github.com/nut-tree/opencv4nodejs
+  - cd opencv4nodejs
+  - export OPENCV4NODEJS_PREBUILT_SKIP_DEPENDENCIES=1
+  # install new opencv-build version
+  - npm install $TRAVIS_BUILD_DIR
+  - npm install
+  - cd test
+  - npm install
+  - npm run test
+  - unset OPENCV4NODEJS_PREBUILT_SKIP_DEPENDENCIES
 
 before_deploy:
   - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
