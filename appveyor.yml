@@ -24,7 +24,7 @@ install:
 
 build_script:
   - cd c:\projects\npm-opencv-build
-  - SET OPENCV4NODEJS_AUTOBUILD_OPENCV_VERSION=4.1.1
+  - SET OPENCV4NODEJS_AUTOBUILD_OPENCV_VERSION=4.4.0
   - npm install
 
 test_script:
